@@ -1,29 +1,42 @@
 .service-gallery { width: 100%; }
 .gallery-trigger { display: block; position: relative; overflow: hidden; }
-.gallery-trigger > img, .card > img { width: 100%; height: 210px; object-fit: cover; }
+.gallery-trigger > img, .card > img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; flex-shrink: 0; }
 .gallery-trigger > img { transition: transform .3s ease; }
 .gallery-trigger:hover > img { transform: scale(1.035); }
 .gallery-trigger:focus-visible { outline-offset: -4px; }
 .gallery-badge { position: absolute; right: 12px; bottom: 14px; display: flex; gap: 16px; align-items: center; background: #05264e; color: white; padding: 8px 14px; border-radius: 100px; font-size: 14px; font-weight: 700; }
-.photo-dialog { box-sizing: border-box; width: min(960px, 94vw); max-height: 94dvh; padding: 20px; border: 0; border-radius: 16px; color: #0b2053; background: #f7faff; overscroll-behavior: contain; }
+.photo-dialog { box-sizing: border-box; width: min(960px, 94vw); height: auto; max-height: 94dvh; padding: 20px; border: 0; border-radius: 16px; color: #0b2053; background: #f7faff; overscroll-behavior: contain; }
+.photo-dialog[open] { display: grid; grid-template-rows: auto auto auto auto; overflow-y: auto; }
 .photo-dialog::backdrop { background: #03152de6; }
 .gallery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
 .gallery-heading h2 { font-size: clamp(19px, 3vw, 27px); letter-spacing: -.015em; }
 .photo-dialog button { margin: 0; border-radius: 8px; min-height: 44px; background: #06366a; color: white; box-shadow: none; }
 .photo-dialog button:hover { background: #087bbd; transform: none; box-shadow: none; }
 .gallery-close { flex-shrink: 0; width: 44px; padding: 8px; }
-.gallery-figure { margin: 0; }
-.gallery-image { width: 100%; height: min(54dvh, 560px); object-fit: contain; background: #e5edf4; border-radius: 8px; }
-.gallery-figure figcaption { margin-top: 10px; font-size: 15px; min-height: 24px; }
+.gallery-figure { margin: 0; min-height: 0; display: grid; grid-template-rows: auto 44px; gap: 8px; }
+.gallery-stage { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 0; overflow: hidden; background: #e5edf4; border-radius: 8px; }
+.gallery-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; object-position: center; }
+.gallery-figure figcaption { margin: 0; font-size: 15px; line-height: 22px; overflow-y: auto; }
 .gallery-controls { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 14px 0; }
 .gallery-count { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .gallery-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding: 5px; }
-.gallery-thumbnails button { flex: 0 0 72px; padding: 3px; background: transparent; opacity: .65; }
-.gallery-thumbnails img { width: 66px; height: 52px; object-fit: cover; border-radius: 4px; }
+.gallery-thumbnails button { flex: 0 0 86px; height: 60px; padding: 3px; background: transparent; opacity: .65; }
+.gallery-thumbnails img { width: 80px; height: 54px; object-fit: cover; border-radius: 4px; }
 .gallery-thumbnails button[aria-pressed="true"] { opacity: 1; outline: 3px solid #087bbd; outline-offset: 0; }
 @media (max-width: 600px) {
  .photo-dialog { padding: 14px; }
  .photo-dialog .gallery-controls button { font-size: 14px; padding: 10px 12px; }
- .gallery-image { height: 48dvh; }
+ .gallery-heading h2 { font-size: 19px; line-height: 1.2; }
+ .gallery-thumbnails button { flex-basis: 70px; height: 50px; }
+ .gallery-thumbnails img { width: 64px; height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) { .gallery-trigger > img { transition: none; } .gallery-trigger:hover > img { transform: none; } }
+
+@media (max-height: 500px) {
+ .photo-dialog { padding: 10px; width: min(680px, 94vw); height: auto; max-height: 98dvh; }
+ .gallery-heading { margin-bottom: 6px; }
+ .gallery-heading h2 { font-size: 18px; }
+ .gallery-controls { margin: 6px 0; }
+ .gallery-thumbnails { display: none; }
+ .gallery-figure { grid-template-rows: auto 22px; gap: 4px; }
+}

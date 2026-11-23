@@ -4,7 +4,7 @@ const { title, photos } = Astro.props;
 ---
 <div class="service-gallery" data-photos={JSON.stringify(photos)} data-title={title}>
   <a class="gallery-trigger" href={photos[0].src} aria-label={`Ver ${photos.length} fotos de ${title}`} aria-haspopup="dialog">
-    <img src={photos[0].src} alt={photos[0].alt} loading="lazy" width="800" height="500" />
+    <img src={photos[0].src} alt={photos[0].alt} loading="lazy" width="1600" height="900" />
     <span class="gallery-badge">Ver {photos.length} fotos <span aria-hidden="true">↗</span></span>
   </a>
 </div>

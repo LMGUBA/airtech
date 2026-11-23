@@ -1,7 +1,6 @@
 ---
 import GaleriaServicio from '../components/GaleriaServicio.astro';
 import VisorGaleria from '../components/VisorGaleria.astro';
-import '../styles/gallery.css';
 import Icon from '../components/Icon.astro';
 import '../styles/fonts.css';
 import Layout from '../layouts/Layout.astro';
@@ -10,6 +9,7 @@ import { REDES } from '../config/contacto';
 import '../styles/landing.css';
 import '../styles/motion.css';
 import '../styles/redes.css';
+import '../styles/gallery.css';
 const services = [
  ['clima','Climatización y aire acondicionado','Suministro, instalación y mantenimiento de sistemas split, VRF y chiller.','❄'],
  ['aire','Ventilación y extracción mecánica','Equipos, ductos y campanas de extracción para uso comercial, industrial y minero.','✣'],
@@ -18,7 +18,7 @@ const services = [
  ['electricidad','Soluciones eléctricas y electromecánicas','Montaje de motores eléctricos, grupos electrógenos y sistemas de automatización industrial.','ϟ'],
  ['oxigeno','Generación de oxígeno médico','Suministro, instalación, puesta en marcha y soporte de plantas de oxígeno médico.','✚']
 ];
-const photo = (name: string, alt: string) => ({ src: `/imagenes/trabajos/${name}.webp`, alt });
+const photo = (name: string, alt: string) => ({ src: `/imagenes/trabajos/extendidas/${name}.webp`, alt });
 const galleries: Record<string, {src: string; alt: string}[]> = {
  clima: [photo('climatizacion-equipos', 'Equipos de climatización instalados en azotea'), photo('climatizacion-mantenimiento', 'Mantenimiento de unidades de aire acondicionado'), photo('chiller', 'Revisión de equipo chiller'), photo('climatizacion-tecnico', 'Técnico trabajando en una unidad de climatización')],
  aire: [photo('ventilacion-cubierta', 'Extractores instalados en cubierta industrial'), photo('extractor-industrial', 'Equipo de extracción y ventilación industrial')],

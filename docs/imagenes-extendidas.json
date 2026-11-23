@@ -1,0 +1,107 @@
+{
+  "tool": "image_gen",
+  "size": [
+    1600,
+    900
+  ],
+  "images": [
+    {
+      "name": "climatizacion-equipos",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-19e76b46-8550-46b9-b0df-6c2a031ec55c.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (climatizacion-equipos). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/climatizacion-equipos.webp",
+      "output": "public/imagenes/trabajos/extendidas/climatizacion-equipos.webp"
+    },
+    {
+      "name": "climatizacion-mantenimiento",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-f1b571e2-e30c-4b3c-94a8-b3ce1075f9ce.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (climatizacion-mantenimiento). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/climatizacion-mantenimiento.webp",
+      "output": "public/imagenes/trabajos/extendidas/climatizacion-mantenimiento.webp"
+    },
+    {
+      "name": "chiller",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-1dff473f-8b58-4bf6-85f8-95482f926776.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (chiller). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/chiller.webp",
+      "output": "public/imagenes/trabajos/extendidas/chiller.webp"
+    },
+    {
+      "name": "climatizacion-tecnico",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-ed7b9afa-4621-47ec-a0f2-c6cf0d472b3e.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (climatizacion-tecnico). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/climatizacion-tecnico.webp",
+      "output": "public/imagenes/trabajos/extendidas/climatizacion-tecnico.webp"
+    },
+    {
+      "name": "ventilacion-cubierta",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-079e3815-3dc0-4f28-bd39-ad0dda587bd7.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (ventilacion-cubierta). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/ventilacion-cubierta.webp",
+      "output": "public/imagenes/trabajos/extendidas/ventilacion-cubierta.webp"
+    },
+    {
+      "name": "extractor-industrial",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-c6682c89-7b8e-4065-8a90-d815c68e1003.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (extractor-industrial). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/extractor-industrial.webp",
+      "output": "public/imagenes/trabajos/extendidas/extractor-industrial.webp"
+    },
+    {
+      "name": "soldadura",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-b4c502a5-e6f3-4eae-b7f5-ee176a712a06.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (soldadura). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/soldadura.webp",
+      "output": "public/imagenes/trabajos/extendidas/soldadura.webp"
+    },
+    {
+      "name": "montaje-grua",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-ce2e2117-215a-46ed-810d-ff3a1fd09d7f.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (montaje-grua). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/montaje-grua.webp",
+      "output": "public/imagenes/trabajos/extendidas/montaje-grua.webp"
+    },
+    {
+      "name": "tecnico-compresor",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-486ef6dc-2618-4bad-ba8c-f557281741ad.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (tecnico-compresor). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/tecnico-compresor.webp",
+      "output": "public/imagenes/trabajos/extendidas/tecnico-compresor.webp"
+    },
+    {
+      "name": "bombas-electromecanicas",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-a6483195-08bb-43ea-bbf5-04062b98f42d.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (bombas-electromecanicas). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/bombas-electromecanicas.webp",
+      "output": "public/imagenes/trabajos/extendidas/bombas-electromecanicas.webp"
+    },
+    {
+      "name": "mantenimiento-maquinaria",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-69fc8f58-112e-4794-a167-deecfd3bf1a2.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (mantenimiento-maquinaria). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/mantenimiento-maquinaria.webp",
+      "output": "public/imagenes/trabajos/extendidas/mantenimiento-maquinaria.webp"
+    },
+    {
+      "name": "mantenimiento-filtros",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-842b7348-cb8c-4adf-9d11-a5a5294f1781.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (mantenimiento-filtros). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/mantenimiento-filtros.webp",
+      "output": "public/imagenes/trabajos/extendidas/mantenimiento-filtros.webp"
+    },
+    {
+      "name": "revision-filtros",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-25cfae61-45fb-4b29-9d8b-5870a8c13625.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (revision-filtros). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/revision-filtros.webp",
+      "output": "public/imagenes/trabajos/extendidas/revision-filtros.webp"
+    },
+    {
+      "name": "compresores",
+      "generated": "/Users/luismiguelguerebalvin/.codex/generated_images/01a20a46-0a8c-7873-94fd-10a5a67d0054/exec-9fb95b83-a45e-487b-973a-af1baa7ffb27.png",
+      "prompt": "Use case: compositing / photographic outpainting. Edit target: the supplied Airtech work photograph (compresores). Extend this exact photograph into a seamless horizontal 16:9 landscape image, ideally 1920x1080. Keep the ENTIRE original photograph visible and geometrically undistorted within the final image. Preserve the original people, identities, poses, equipment, logos, lettering, tools, lighting and perspective. Add photographic surroundings only OUTSIDE its original edges, extending the same room, rooftop, ground, wall or sky naturally. For portrait originals, extend substantially to both left and right rather than cropping or enlarging the subject. Do not add people or new prominent machines. Do not duplicate subjects, mirror edges, blur side panels, add borders or solid padding. The whole canvas must be a continuous realistic scene edge-to-edge, not a collage. Match the original documentary texture and lighting; do not redesign or beautify the original work. For wide originals extend top/bottom as necessary. Output one 16:9 photo.",
+      "original": "public/imagenes/trabajos/compresores.webp",
+      "output": "public/imagenes/trabajos/extendidas/compresores.webp"
+    }
+  ]
+}
