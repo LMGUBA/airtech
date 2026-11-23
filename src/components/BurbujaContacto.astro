@@ -1,0 +1,426 @@
+---
+import '../styles/burbuja-contacto.css';
+import {
+  AREAS,
+  AREA_POR_DEFECTO,
+  DIRECCION,
+  DIRECCION_CORTA,
+  MAPA_URL,
+  enlaceCorreo,
+  enlaceTelefono,
+  enlaceWhatsapp,
+} from '../config/contacto';
+
+const inicial = AREAS[AREA_POR_DEFECTO];
+const areas = Object.values(AREAS);
+---
+
+{/* Sprite de iconos: se define una sola vez y se reusa con <use> */}
+<svg class="bc-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="bc-i-burbuja" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="bc-i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="bc-i-ubicacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="bc-i-correo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="bc-i-telefono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="bc-i-robot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+  <symbol id="bc-i-enviar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+  {/* Logo oficial de WhatsApp (Simple Icons) */}
+  <symbol id="bc-i-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+</svg>
+
+<div class="bc" id="bc" data-area={AREA_POR_DEFECTO}>
+
+  <div class="bc-menu" id="bc-menu" aria-label="Opciones de contacto" inert>
+
+    <div class="bc-areas" role="radiogroup" aria-label="Área de contacto" style="--bc-delay:300ms">
+      {areas.map((area, i) => (
+        <button
+          type="button"
+          class="bc-area"
+          role="radio"
+          data-bc-area={area.id}
+          aria-checked={area.id === AREA_POR_DEFECTO ? 'true' : 'false'}
+          tabindex={area.id === AREA_POR_DEFECTO ? 0 : -1}
+          data-indice={i}
+        >{area.nombre}</button>
+      ))}
+    </div>
+
+    <ul class="bc-opciones">
+      <li class="bc-opcion" style="--bc-delay:240ms">
+        <a class="bc-accion" href={MAPA_URL} target="_blank" rel="noopener noreferrer" aria-label={`Ver la ubicación en Google Maps: ${DIRECCION}`}>
+          <span class="bc-etiqueta">
+            <span class="bc-titulo">Ubicación</span>
+            <span class="bc-sub">{DIRECCION_CORTA}</span>
+          </span>
+          <span class="bc-circulo bc-circulo--ubicacion"><svg aria-hidden="true"><use href="#bc-i-ubicacion"/></svg></span>
+        </a>
+      </li>
+
+      <li class="bc-opcion" style="--bc-delay:180ms">
+        <a class="bc-accion" data-bc-enlace="correo" href={enlaceCorreo(inicial)} aria-label={`Escribir a ${inicial.nombre}, ${inicial.correo}`}>
+          <span class="bc-etiqueta">
+            <span class="bc-titulo">Correo</span>
+            <span class="bc-sub" data-bc-sub="correo">{inicial.correo}</span>
+          </span>
+          <span class="bc-circulo bc-circulo--correo"><svg aria-hidden="true"><use href="#bc-i-correo"/></svg></span>
+        </a>
+      </li>
+
+      <li class="bc-opcion" style="--bc-delay:120ms">
+        <button type="button" class="bc-accion" data-bc-abrir-chat aria-label="Abrir el asistente virtual de Airtech">
+          <span class="bc-etiqueta">
+            <span class="bc-titulo">Asistente virtual</span>
+            <span class="bc-sub">Chatea con nosotros</span>
+          </span>
+          <span class="bc-circulo bc-circulo--asistente"><svg aria-hidden="true"><use href="#bc-i-robot"/></svg></span>
+        </button>
+      </li>
+
+      <li class="bc-opcion" style="--bc-delay:60ms">
+        <a class="bc-accion" data-bc-enlace="telefono" href={enlaceTelefono(inicial)} aria-label={`Llamar a ${inicial.nombre}, ${inicial.telefonoVisible}`}>
+          <span class="bc-etiqueta">
+            <span class="bc-titulo">Llamar</span>
+            <span class="bc-sub" data-bc-sub="telefono">{inicial.telefonoVisible}</span>
+          </span>
+          <span class="bc-circulo bc-circulo--llamar"><svg aria-hidden="true"><use href="#bc-i-telefono"/></svg></span>
+        </a>
+      </li>
+
+      <li class="bc-opcion" style="--bc-delay:0ms">
+        <a class="bc-accion" data-bc-enlace="whatsapp" href={enlaceWhatsapp(inicial)} target="_blank" rel="noopener noreferrer" aria-label={`Escribir por WhatsApp a ${inicial.nombre}, ${inicial.telefonoVisible}`}>
+          <span class="bc-etiqueta">
+            <span class="bc-titulo">WhatsApp</span>
+            <span class="bc-sub">Respuesta rápida</span>
+          </span>
+          <span class="bc-circulo bc-circulo--whatsapp"><svg aria-hidden="true"><use href="#bc-i-whatsapp"/></svg></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <button type="button" class="bc-fab" id="bc-fab" aria-expanded="false" aria-controls="bc-menu" aria-label="Abrir opciones de contacto">
+    <span class="bc-pulso" aria-hidden="true"></span>
+    <svg class="bc-icono bc-icono--abrir" aria-hidden="true"><use href="#bc-i-burbuja"/></svg>
+    <svg class="bc-icono bc-icono--cerrar" aria-hidden="true"><use href="#bc-i-x"/></svg>
+  </button>
+
+  <section class="bc-chat" id="bc-chat" aria-label="Asistente virtual de Airtech" inert>
+    <header class="bc-chat-head">
+      <span class="bc-avatar" aria-hidden="true"><svg><use href="#bc-i-robot"/></svg></span>
+      <div>
+        <strong>Asistente Airtech</strong>
+        <span class="bc-estado"><i class="bc-punto" aria-hidden="true"></i>En línea</span>
+      </div>
+      <button type="button" class="bc-cerrar" data-bc-cerrar-chat aria-label="Cerrar el asistente virtual">
+        <svg aria-hidden="true"><use href="#bc-i-x"/></svg>
+      </button>
+    </header>
+
+    <div class="bc-mensajes" id="bc-mensajes" role="log" aria-live="polite" aria-label="Conversación con el asistente"></div>
+
+    <form class="bc-form" id="bc-form">
+      <label class="bc-oculto" for="bc-texto">Escribe tu mensaje para el asistente</label>
+      <textarea id="bc-texto" name="mensaje" rows="1" placeholder="Escribe tu mensaje…" autocomplete="off"></textarea>
+      <button type="submit" class="bc-enviar" id="bc-enviar" aria-label="Enviar mensaje">
+        <svg aria-hidden="true"><use href="#bc-i-enviar"/></svg>
+      </button>
+    </form>
+  </section>
+</div>
+
+<script>
+import {
+  AREAS,
+  AREA_POR_DEFECTO,
+  CHATBOT_TIMEOUT_MS,
+  CHATBOT_WEBHOOK,
+  CHAT_BIENVENIDA,
+  CHAT_ERROR_ANTES,
+  CHAT_ERROR_DESPUES,
+  CHAT_ERROR_ENLACE,
+  enlaceCorreo,
+  enlaceTelefono,
+  enlaceWhatsapp,
+  type AreaId,
+} from '../config/contacto';
+
+const raiz = document.getElementById('bc');
+const fab = document.getElementById('bc-fab');
+const menu = document.getElementById('bc-menu');
+const chat = document.getElementById('bc-chat');
+const mensajes = document.getElementById('bc-mensajes');
+const formulario = document.getElementById('bc-form') as HTMLFormElement | null;
+const campo = document.getElementById('bc-texto') as HTMLTextAreaElement | null;
+const botonEnviar = document.getElementById('bc-enviar') as HTMLButtonElement | null;
+
+if (raiz && fab && menu && chat && mensajes && formulario && campo && botonEnviar) {
+  const CLAVE_AREA = 'airtech-area';
+  const CLAVE_SESION = 'airtech-chat-sesion';
+
+  /* --------------------- Memoria de la pestaña (segura) --------------------- */
+  const leer = (clave: string): string | null => {
+    try { return sessionStorage.getItem(clave); } catch { return null; }
+  };
+  const escribir = (clave: string, valor: string): void => {
+    try { sessionStorage.setItem(clave, valor); } catch { /* modo privado: seguimos sin memoria */ }
+  };
+
+  const esArea = (valor: string | null): valor is AreaId =>
+    valor === 'ventas' || valor === 'servicio-tecnico';
+
+  const guardada = leer(CLAVE_AREA);
+  let areaActual: AreaId = esArea(guardada) ? guardada : AREA_POR_DEFECTO;
+
+  /* ----------------------------- Selector de área ----------------------------- */
+  const botonesArea = Array.from(menu.querySelectorAll<HTMLButtonElement>('[data-bc-area]'));
+  const enlaces = {
+    correo: menu.querySelector<HTMLAnchorElement>('[data-bc-enlace="correo"]'),
+    telefono: menu.querySelector<HTMLAnchorElement>('[data-bc-enlace="telefono"]'),
+    whatsapp: menu.querySelector<HTMLAnchorElement>('[data-bc-enlace="whatsapp"]'),
+  };
+  const subtextos = {
+    correo: menu.querySelector<HTMLElement>('[data-bc-sub="correo"]'),
+    telefono: menu.querySelector<HTMLElement>('[data-bc-sub="telefono"]'),
+  };
+
+  const cambiarSubtexto = (elemento: HTMLElement | null, valor: string, animar: boolean): void => {
+    if (!elemento || elemento.textContent === valor) return;
+    if (!animar) { elemento.textContent = valor; return; }
+    elemento.classList.add('is-cambiando');
+    setTimeout(() => {
+      elemento.textContent = valor;
+      elemento.classList.remove('is-cambiando');
+    }, 180);
+  };
+
+  const aplicarArea = (id: AreaId, animar = true): void => {
+    areaActual = id;
+    const area = AREAS[id];
+    raiz.dataset.area = id;
+
+    for (const boton of botonesArea) {
+      const activo = boton.dataset.bcArea === id;
+      boton.setAttribute('aria-checked', activo ? 'true' : 'false');
+      boton.tabIndex = activo ? 0 : -1;
+    }
+
+    if (enlaces.correo) {
+      enlaces.correo.href = enlaceCorreo(area);
+      enlaces.correo.setAttribute('aria-label', `Escribir a ${area.nombre}, ${area.correo}`);
+    }
+    if (enlaces.telefono) {
+      enlaces.telefono.href = enlaceTelefono(area);
+      enlaces.telefono.setAttribute('aria-label', `Llamar a ${area.nombre}, ${area.telefonoVisible}`);
+    }
+    if (enlaces.whatsapp) {
+      enlaces.whatsapp.href = enlaceWhatsapp(area);
+      enlaces.whatsapp.setAttribute('aria-label', `Escribir por WhatsApp a ${area.nombre}, ${area.telefonoVisible}`);
+    }
+
+    cambiarSubtexto(subtextos.correo, area.correo, animar);
+    cambiarSubtexto(subtextos.telefono, area.telefonoVisible, animar);
+    escribir(CLAVE_AREA, id);
+  };
+
+  botonesArea.forEach((boton, indice) => {
+    boton.addEventListener('click', () => aplicarArea(boton.dataset.bcArea as AreaId));
+    boton.addEventListener('keydown', (evento) => {
+      if (evento.key !== 'ArrowRight' && evento.key !== 'ArrowLeft') return;
+      evento.preventDefault();
+      const paso = evento.key === 'ArrowRight' ? 1 : -1;
+      const siguiente = botonesArea[(indice + paso + botonesArea.length) % botonesArea.length];
+      aplicarArea(siguiente.dataset.bcArea as AreaId);
+      siguiente.focus();
+    });
+  });
+
+  /* --------------------------------- Menú --------------------------------- */
+  const menuAbierto = () => raiz.classList.contains('is-open');
+
+  const abrirMenu = (): void => {
+    raiz.classList.add('is-open');
+    menu.removeAttribute('inert');
+    fab.setAttribute('aria-expanded', 'true');
+    fab.setAttribute('aria-label', 'Cerrar opciones de contacto');
+    const activo = botonesArea.find((b) => b.getAttribute('aria-checked') === 'true') ?? botonesArea[0];
+    activo?.focus();
+  };
+
+  const cerrarMenu = (devolverFoco = false): void => {
+    if (!menuAbierto()) return;
+    if (devolverFoco) fab.focus();
+    raiz.classList.remove('is-open');
+    menu.setAttribute('inert', '');
+    fab.setAttribute('aria-expanded', 'false');
+    fab.setAttribute('aria-label', 'Abrir opciones de contacto');
+  };
+
+  fab.addEventListener('click', () => (menuAbierto() ? cerrarMenu() : abrirMenu()));
+
+  // Elegir una opción cierra el menú; cambiar de área, no.
+  menu.querySelectorAll('.bc-accion').forEach((accion) => {
+    accion.addEventListener('click', () => cerrarMenu());
+  });
+
+  /* ------------------------------- Asistente ------------------------------- */
+  const chatAbierto = () => raiz.classList.contains('is-chat-open');
+  const irAlFinal = (): void => { mensajes.scrollTop = mensajes.scrollHeight; };
+
+  const agregarMensaje = (quien: 'bot' | 'yo', contenido: string): HTMLDivElement => {
+    const burbuja = document.createElement('div');
+    burbuja.className = `bc-msg bc-msg--${quien}`;
+    burbuja.textContent = contenido;
+    mensajes.appendChild(burbuja);
+    irAlFinal();
+    return burbuja;
+  };
+
+  const mensajeDeRespaldo = (): void => {
+    const area = AREAS[areaActual];
+    const burbuja = document.createElement('div');
+    burbuja.className = 'bc-msg bc-msg--bot';
+    const enlace = document.createElement('a');
+    enlace.href = enlaceWhatsapp(area);
+    enlace.target = '_blank';
+    enlace.rel = 'noopener noreferrer';
+    enlace.textContent = CHAT_ERROR_ENLACE;
+    burbuja.append(document.createTextNode(CHAT_ERROR_ANTES), enlace, document.createTextNode(CHAT_ERROR_DESPUES));
+    mensajes.appendChild(burbuja);
+    irAlFinal();
+  };
+
+  const mostrarEscribiendo = (): HTMLDivElement => {
+    const fila = document.createElement('div');
+    fila.className = 'bc-msg bc-msg--bot bc-escribiendo';
+    fila.setAttribute('aria-label', 'El asistente está escribiendo');
+    for (let i = 0; i < 3; i += 1) fila.appendChild(document.createElement('i'));
+    mensajes.appendChild(fila);
+    irAlFinal();
+    return fila;
+  };
+
+  const abrirChat = (): void => {
+    cerrarMenu();
+    raiz.classList.add('is-chat-open');
+    chat.removeAttribute('inert');
+    if (!mensajes.childElementCount) agregarMensaje('bot', CHAT_BIENVENIDA);
+    campo.focus();
+  };
+
+  const cerrarChat = (devolverFoco = false): void => {
+    if (!chatAbierto()) return;
+    if (devolverFoco) fab.focus();
+    raiz.classList.remove('is-chat-open');
+    chat.setAttribute('inert', '');
+  };
+
+  menu.querySelector('[data-bc-abrir-chat]')?.addEventListener('click', abrirChat);
+  chat.querySelector('[data-bc-cerrar-chat]')?.addEventListener('click', () => cerrarChat(true));
+
+  /* ------------------------------ n8n (webhook) ------------------------------ */
+  const idSesion = (): string => {
+    let id = leer(CLAVE_SESION);
+    if (!id) {
+      id = typeof crypto !== 'undefined' && 'randomUUID' in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      escribir(CLAVE_SESION, id);
+    }
+    return id;
+  };
+
+  const extraerTexto = (dato: unknown): string => {
+    if (typeof dato === 'string') return dato.trim();
+    if (Array.isArray(dato)) return dato.length ? extraerTexto(dato[0]) : '';
+    if (dato && typeof dato === 'object') {
+      const objeto = dato as Record<string, unknown>;
+      for (const llave of ['output', 'text', 'message', 'reply', 'answer']) {
+        const valor = objeto[llave];
+        if (typeof valor === 'string' && valor.trim()) return valor.trim();
+      }
+    }
+    return '';
+  };
+
+  const preguntarAlAgente = async (pregunta: string): Promise<string> => {
+    if (!CHATBOT_WEBHOOK) throw new Error('Webhook sin configurar');
+    const control = new AbortController();
+    const reloj = setTimeout(() => control.abort(), CHATBOT_TIMEOUT_MS);
+    try {
+      const respuesta = await fetch(CHATBOT_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sendMessage',
+          sessionId: idSesion(),
+          chatInput: pregunta,
+          area: areaActual,
+        }),
+        signal: control.signal,
+      });
+      if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+      const crudo = (await respuesta.text()).trim();
+      let salida = '';
+      try { salida = extraerTexto(JSON.parse(crudo)); } catch { salida = crudo; }
+      if (!salida) throw new Error('Respuesta vacía');
+      return salida;
+    } finally {
+      clearTimeout(reloj);
+    }
+  };
+
+  /* ------------------------------ Campo de texto ------------------------------ */
+  const ajustarAlto = (): void => {
+    campo.style.height = 'auto';
+    campo.style.height = `${Math.min(campo.scrollHeight, 120)}px`;
+  };
+  campo.addEventListener('input', ajustarAlto);
+  campo.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Enter' && !evento.shiftKey) {
+      evento.preventDefault();
+      formulario.requestSubmit();
+    }
+  });
+
+  let esperando = false;
+  formulario.addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    const pregunta = campo.value.trim();
+    if (!pregunta || esperando) return;
+
+    agregarMensaje('yo', pregunta);
+    campo.value = '';
+    ajustarAlto();
+    esperando = true;
+    botonEnviar.disabled = true;
+    const escribiendo = mostrarEscribiendo();
+
+    try {
+      const salida = await preguntarAlAgente(pregunta);
+      escribiendo.remove();
+      agregarMensaje('bot', salida);
+    } catch {
+      escribiendo.remove();
+      mensajeDeRespaldo();
+    } finally {
+      esperando = false;
+      botonEnviar.disabled = false;
+      campo.focus();
+    }
+  });
+
+  /* --------------------------- Cierres globales --------------------------- */
+  document.addEventListener('click', (evento) => {
+    if (!raiz.contains(evento.target as Node)) cerrarMenu();
+  });
+
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'Escape') return;
+    if (chatAbierto()) { cerrarChat(true); return; }
+    if (menuAbierto()) cerrarMenu(true);
+  });
+
+  aplicarArea(areaActual, false);
+}
+</script>

@@ -1,0 +1,112 @@
+/* ===== Redes sociales en la seccion de contacto ===== */
+
+.redes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.redes strong {
+  font-size: 14px;
+  font-weight: 750;
+  margin-right: 2px;
+}
+.redes a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #fff;
+  background: #ffffff26;
+  border: 1px solid #ffffff4d;
+  transition: transform .25s ease, background-color .25s ease, border-color .25s ease;
+}
+.redes a svg { width: 21px; height: 21px }
+.redes a:hover, .redes a:focus-visible { transform: translateY(-3px) }
+.redes .red-facebook:hover, .redes .red-facebook:focus-visible { background: #1877f2; border-color: #1877f2 }
+.redes .red-linkedin:hover, .redes .red-linkedin:focus-visible { background: #0a66c2; border-color: #0a66c2 }
+.redes .red-tiktok:hover, .redes .red-tiktok:focus-visible { background: #fe2c55; border-color: #fe2c55 }
+
+@media (max-width: 600px) {
+  .redes { margin-top: 16px }
+}
+@media (prefers-reduced-motion: reduce) {
+  .redes a { transition: none }
+  .redes a:hover, .redes a:focus-visible { transform: none }
+}
+
+/* ===== Credito del desarrollador en el footer ===== */
+
+.developer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.developer-credit img {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px #ffffff40;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.developer-credit:hover img,
+.developer-credit:focus-visible img {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 2px #1ec2ee;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .developer-credit img { transition: none }
+  .developer-credit:hover img, .developer-credit:focus-visible img { transform: none }
+}
+
+/* La burbuja de contacto es fija abajo a la derecha: dejamos sitio en el footer
+   para que no tape el credito del desarrollador. */
+@media (min-width: 601px) {
+  footer .wrap { padding-right: 86px }
+}
+@media (max-width: 600px) {
+  footer { padding-bottom: 84px }
+}
+
+/* ===== Redes en la cabecera, al costado del logo ===== */
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 26px);
+}
+.redes-header {
+  margin-top: 0;
+  gap: 8px;
+  padding-left: clamp(12px, 2vw, 22px);
+  border-left: 1px solid #dbe6f1;
+}
+.redes-header a {
+  width: 34px;
+  height: 34px;
+  color: var(--ink);
+  background: #eef5fb;
+  border-color: #d9e6f2;
+}
+.redes-header a svg { width: 18px; height: 18px }
+.redes-header a:hover, .redes-header a:focus-visible { color: #fff }
+.bar .marca .logo { transition: width .35s ease, height .35s ease }
+
+/* Por debajo de 880 px la cabecera no tiene aire entre el logo y el menu:
+   ahi ocultamos las redes, que siguen en contacto y en el pie. */
+@media (max-width: 880px) {
+  .redes-header { display: none }
+}
+
+/* Nunca se parten en dos lineas, y entre 881 y 1100 px van mas compactas. */
+.redes-header { flex-wrap: nowrap }
+@media (max-width: 1100px) {
+  .redes-header { gap: 6px; padding-left: 12px }
+  .redes-header a { width: 30px; height: 30px }
+  .redes-header a svg { width: 16px; height: 16px }
+}

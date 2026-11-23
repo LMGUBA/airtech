@@ -1,0 +1,129 @@
+---
+import GaleriaServicio from '../components/GaleriaServicio.astro';
+import VisorGaleria from '../components/VisorGaleria.astro';
+import '../styles/gallery.css';
+import Icon from '../components/Icon.astro';
+import '../styles/fonts.css';
+import Layout from '../layouts/Layout.astro';
+import BurbujaContacto from '../components/BurbujaContacto.astro';
+import { REDES } from '../config/contacto';
+import '../styles/landing.css';
+import '../styles/motion.css';
+import '../styles/redes.css';
+const services = [
+ ['clima','Climatización y aire acondicionado','Suministro, instalación y mantenimiento de sistemas split, VRF y chiller.','❄'],
+ ['aire','Ventilación y extracción mecánica','Equipos, ductos y campanas de extracción para uso comercial, industrial y minero.','✣'],
+ ['frio','Refrigeración industrial','Equipos de refrigeración comercial e industrial y cámaras frigoríficas a medida.','❄'],
+ ['metal','Metal mecánica y ferretería','Fabricación de estructuras metálicas, soldadura industrial y suministro de materiales.','⚙'],
+ ['electricidad','Soluciones eléctricas y electromecánicas','Montaje de motores eléctricos, grupos electrógenos y sistemas de automatización industrial.','ϟ'],
+ ['oxigeno','Generación de oxígeno médico','Suministro, instalación, puesta en marcha y soporte de plantas de oxígeno médico.','✚']
+];
+const photo = (name: string, alt: string) => ({ src: `/imagenes/trabajos/${name}.webp`, alt });
+const galleries: Record<string, {src: string; alt: string}[]> = {
+ clima: [photo('climatizacion-equipos', 'Equipos de climatización instalados en azotea'), photo('climatizacion-mantenimiento', 'Mantenimiento de unidades de aire acondicionado'), photo('chiller', 'Revisión de equipo chiller'), photo('climatizacion-tecnico', 'Técnico trabajando en una unidad de climatización')],
+ aire: [photo('ventilacion-cubierta', 'Extractores instalados en cubierta industrial'), photo('extractor-industrial', 'Equipo de extracción y ventilación industrial')],
+ metal: [photo('soldadura', 'Trabajo de soldadura en taller'), photo('montaje-grua', 'Maniobra de montaje con camión grúa')],
+ electricidad: [photo('tecnico-compresor', 'Revisión de equipo y tablero de control'), photo('bombas-electromecanicas', 'Sistema de bombas y motores eléctricos'), photo('mantenimiento-maquinaria', 'Mantenimiento de maquinaria en campo'), photo('mantenimiento-filtros', 'Mantenimiento de filtros de aire comprimido'), photo('revision-filtros', 'Revisión de componentes del sistema de filtrado'), photo('compresores', 'Equipos de compresión industrial')]
+};
+const clients = [
+ ['ibt', 'IBT Group'],
+ ['kaelin', 'Kaelin'],
+ ['barton', 'Barton'],
+ ['ocp', 'OCP Cobriza'],
+ ['mtc', 'Ministerio de Transportes y Comunicaciones'],
+ ['diris', 'Dirección de Redes Integradas de Salud Lima Este'],
+ ['essalud', 'EsSalud'],
+ ['villa', 'Hospital de Emergencias Villa El Salvador'],
+ ['socios', 'Partners In Health · Socios En Salud'],
+ ['logisminsa', 'Logisminsa'],
+ ['rscorp', 'RS Corp']
+];
+const whatsapp = 'https://wa.me/51963424337?text=';
+const links = ['Inicio','Nosotros','Servicios','Clientes','Contacto'];
+---
+<Layout>
+<header id="inicio"><div class="wrap bar"><div class="marca"><a href="#inicio"><img class="logo" src="/imagenes/airtech.webp" alt="AIRTECH S.A.C."/></a><div class="redes redes-header">{REDES.map(red=><a class={"red-"+red.id} href={red.url} target="_blank" rel="noopener noreferrer" aria-label={"Airtech en "+red.nombre}><Icon name={red.id} /></a>)}</div></div><nav aria-label="Principal">{links.map(item=><a href={'#'+item.toLowerCase()}>{item}</a>)}</nav></div></header>
+<main>
+<section class="hero"><div class="wrap intro"><h1>Soluciones integrales<br/>para tu <em>industria</em></h1><p>Climatización, refrigeración, ventilación, extracción, metal mecánica, electricidad y electromecánica.</p><a class="cta" href={whatsapp+encodeURIComponent('Hola, quisiera solicitar una cotización.')}><Icon name="whatsapp" /> Cotiza por WhatsApp <b aria-hidden="true">›</b></a></div>
+<svg class="wave" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><path fill="#008aed" d="M0 5Q45 65 195 49T470 54T800 52Q925 64 1000 8V70H0Z"/><path fill="#22bdfa" d="M0 40Q80 7 220 51T510 54T805 54Q920 70 1000 29V70H0Z"/><path fill="#f7faff" d="M0 67Q72 21 217 48T447 48T695 53T877 61Q946 66 1000 44V70H0Z"/></svg></section>
+<section class="wrap about" id="nosotros"><img class="ducts" data-reveal="left" src="/imagenes/trabajos/supervision-industrial.webp" alt="Supervisión técnica en instalaciones industriales" loading="lazy" width="794" height="446"/><div data-reveal="right"><h2>¿Quiénes somos?</h2><p>Somos Airtech S.A.C., una empresa dedicada a ofrecer bienes y servicios en climatización, refrigeración, ventilación y extracción, metal mecánica, electricidad y electromecánica para los sectores salud, inmobiliario, construcción, minero e industrias afines.</p><div class="values"><article data-reveal="up"><h3><i aria-hidden="true"><Icon name="target" /></i> Misión</h3><p>Responder a cada necesidad con soluciones integrales, calidad, sostenibilidad y mejora continua.</p></article><article data-reveal="up" style="--reveal-delay:120ms"><h3><i aria-hidden="true"><Icon name="eye" /></i> Visión</h3><p>Ser líderes a nivel nacional en soluciones integrales para estos sectores, superando las expectativas de nuestros clientes.</p></article></div></div></section>
+<section class="wrap" id="servicios"><h2 class="section-title" data-reveal="up"><span>Nuestros <em>Servicios</em></span></h2><div class="cards">{services.map(([img,name,desc,icon],i)=><article class="card" data-reveal="up" style={`--reveal-delay:${i*90}ms`}>{galleries[img] ? <GaleriaServicio title={name} photos={galleries[img]} /> : <img loading="lazy" src={'/imagenes/'+img+'-hd.webp'} alt={name}/>}<div class="card-body"><div class="card-title"><i aria-hidden="true"><Icon name={img} /></i><h3>{name}</h3></div><p>{desc}</p><a class="cta small" aria-label={'Cotizar '+name+' por WhatsApp'} href={whatsapp+encodeURIComponent('Hola, quisiera cotizar el servicio de '+name+'.')}><Icon name="whatsapp" /> Cotiza por WhatsApp <span aria-hidden="true">›</span></a></div></article>)}</div></section>
+<section class="wrap" id="clientes"><h2 class="section-title" data-reveal="up"><span>Nuestros <em>Clientes</em></span></h2><div class="clients">{clients.map(([img,name],i)=><div data-reveal="zoom" style={`--reveal-delay:${i*70}ms`}><img loading="lazy" src={'/imagenes/'+img+'.webp'} alt={name}/></div>)}</div></section>
+<section id="contacto"><div class="wrap contact"><div data-reveal="left"><h2>Contáctanos</h2><address><strong>Ventas</strong><a href="tel:+51963424337">963 424 337</a><a href="mailto:ventas@airtechsac.net">ventas@airtechsac.net</a><strong>Servicio técnico</strong><a href="tel:+51972389377">972 389 377</a><a href="mailto:serviciotecnico@airtechsac.net">serviciotecnico@airtechsac.net</a><p>Jr. Tshudy, Mz. Ñ Lt. 08, Urb. Mangomarca<br/>San Juan de Lurigancho, Lima, Perú</p></address><div class="redes"><strong>Síguenos</strong>{REDES.map(red=><a class={'red-'+red.id} href={red.url} target="_blank" rel="noopener noreferrer" aria-label={'Airtech en '+red.nombre}><Icon name={red.id} /></a>)}</div></div><form id="consulta" data-reveal="right"><h3>Envíanos un mensaje</h3><div class="fields"><label>Nombre completo<input required name="nombre" autocomplete="name"/></label><label>Correo electrónico<input required type="email" name="correo" autocomplete="email"/></label><label>Teléfono / celular<input required type="tel" name="telefono" autocomplete="tel"/></label><label>Asunto<select name="asunto"><option>Consulta general</option>{services.map(s=><option>{s[1]}</option>)}</select></label></div><label>Mensaje<textarea required name="mensaje" rows="2"></textarea></label><button>Continuar en WhatsApp →</button></form></div></section>
+</main><footer><div class="wrap"><strong>AIRTECH S.A.C.</strong> <span>RUC 20610168095</span><a class="developer-credit" href="https://d3marketsoluciones.com/" target="_blank" rel="noopener noreferrer"><img src="/imagenes/d3market.webp" alt="" width="32" height="32" loading="lazy"/>Desarrollado por D3 Market Soluciones</a></div></footer>
+<VisorGaleria />
+<BurbujaContacto />
+</Layout>
+<script>
+document.querySelector<HTMLFormElement>('#consulta')?.addEventListener('submit',event=>{
+ event.preventDefault();
+ const data=new FormData(event.currentTarget as HTMLFormElement);
+ const message=Array.from(data,([key,value])=>key[0].toUpperCase()+key.slice(1)+': '+value).join('\n');
+ location.assign('https://wa.me/51963424337?text='+encodeURIComponent(message));
+});
+</script>
+<script>
+// --- Movimiento al hacer scroll: reveal, header fijo, progreso, parallax y nav activo ---
+const menosMovimiento = matchMedia('(prefers-reduced-motion: reduce)');
+document.documentElement.dataset.motion = 'on';
+
+const enlaces = Array.from(document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]'));
+const marcarActivo = (id: string) => enlaces.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === id));
+
+// 1. Reveal: cada elemento aparece la primera vez que entra en pantalla
+const revelables = document.querySelectorAll<HTMLElement>('[data-reveal]');
+if (menosMovimiento.matches) {
+  revelables.forEach(el => el.classList.add('is-visible'));
+} else {
+  const observador = new IntersectionObserver((entradas) => {
+    for (const entrada of entradas) {
+      if (!entrada.isIntersecting) continue;
+      entrada.target.classList.add('is-visible');
+      observador.unobserve(entrada.target);
+    }
+  }, { threshold: 0.12, rootMargin: '0px' });
+  revelables.forEach(el => observador.observe(el));
+}
+
+// 2. Header compacto + barra de progreso + parallax de la portada
+const header = document.querySelector<HTMLElement>('header');
+const hero = document.querySelector<HTMLElement>('.hero');
+const progreso = document.createElement('div');
+progreso.className = 'scroll-progress';
+progreso.setAttribute('aria-hidden', 'true');
+document.body.prepend(progreso);
+
+let pendiente = false;
+const alBajar = () => {
+  pendiente = false;
+  const y = window.scrollY;
+  header?.classList.toggle('is-stuck', y > 12);
+  const alto = document.documentElement.scrollHeight - window.innerHeight;
+  progreso.style.transform = `scaleX(${alto > 0 ? Math.min(y / alto, 1) : 0})`;
+  if (hero && !menosMovimiento.matches && hero.getBoundingClientRect().bottom > 0) {
+    const tope = hero.offsetHeight * 0.09;
+    hero.style.setProperty('--parallax', `${Math.min(y * 0.08, tope).toFixed(1)}px`);
+  }
+  if (y < 40) marcarActivo('#inicio');
+};
+window.addEventListener('scroll', () => {
+  if (pendiente) return;
+  pendiente = true;
+  requestAnimationFrame(alBajar);
+}, { passive: true });
+alBajar();
+
+// 3. Nav: marca la sección que se está viendo
+const secciones = enlaces
+  .map(a => document.querySelector<HTMLElement>(a.getAttribute('href') as string))
+  .filter((el): el is HTMLElement => Boolean(el));
+if (secciones.length) {
+  const vigia = new IntersectionObserver((entradas) => {
+    for (const entrada of entradas) {
+      if (!entrada.isIntersecting) continue;
+      marcarActivo(`#${entrada.target.id}`);
+    }
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  secciones.forEach(s => vigia.observe(s));
+}
+</script>

@@ -1,0 +1,113 @@
+/* ============================================================
+   Movimiento y efectos de scroll — AIRTECH
+   Los "reveal" solo se ocultan si hay JS (html.js), y todo se
+   desactiva si el sistema pide menos animacion.
+   ============================================================ */
+
+html { scroll-behavior: smooth }
+header[id], section[id] { scroll-margin-top: 96px }
+
+/* ---------- Header fijo que se compacta al bajar ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: box-shadow .35s ease, background-color .35s ease;
+}
+header.is-stuck {
+  background: #ffffffee;
+  box-shadow: 0 8px 28px #09365626;
+  backdrop-filter: blur(8px);
+}
+.bar { transition: min-height .35s ease }
+.logo { transition: width .35s ease, height .35s ease }
+header.is-stuck .bar { min-height: 64px }
+header.is-stuck .logo { width: 112px; height: 60px }
+
+/* ---------- Barra de progreso de lectura ---------- */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 60;
+  background: linear-gradient(90deg, #079b3d, #22bdfa 55%, #16b7ed);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* ---------- Nav: subraya la seccion visible ---------- */
+nav a { position: relative; transition: color .25s ease }
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .3s ease;
+}
+nav a.is-active { color: var(--blue) }
+nav a.is-active::after { transform: scaleX(1) }
+
+/* ---------- Entrada del hero ---------- */
+.intro h1, .intro p, .intro .cta { animation: rise .9s cubic-bezier(.22,.61,.36,1) backwards }
+.intro h1 { animation-delay: .1s }
+.intro p { animation-delay: .25s }
+.intro .cta { animation-delay: .4s }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px) }
+  to { opacity: 1; transform: none }
+}
+
+/* parallax suave de la portada + olas que se mecen */
+.hero::before { transform: translate3d(0, var(--parallax, 0px), 0) scale(1.18); will-change: transform }
+.wave { width: 104%; left: -2%; animation: drift 9s ease-in-out infinite alternate }
+@keyframes drift {
+  from { transform: translateX(-1.1%) }
+  to { transform: translateX(1.1%) }
+}
+
+/* ---------- Reveal al bajar ---------- */
+html.js [data-reveal] {
+  opacity: 1;
+  transition: opacity .75s cubic-bezier(.22,.61,.36,1), transform .75s cubic-bezier(.22,.61,.36,1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+html.js [data-reveal="up"] { transform: translateY(30px) }
+html.js [data-reveal="left"] { transform: translateX(-34px) }
+html.js [data-reveal="right"] { transform: translateX(34px) }
+html.js [data-reveal="zoom"] { transform: scale(.92) }
+html.js [data-reveal].is-visible { opacity: 1; transform: none }
+
+/* ---------- Microinteracciones ---------- */
+.card { transition: transform .35s ease, box-shadow .35s ease }
+.card:hover { transform: translateY(-7px); box-shadow: 0 16px 34px #09365633 }
+.card > img { transition: transform .5s ease }
+.card:hover > img { transform: scale(1.05) }
+.card-title i { transition: transform .4s ease }
+.card:hover .card-title i { transform: rotate(-8deg) scale(1.08) }
+.clients div { transition: transform .3s ease, box-shadow .3s ease }
+.clients div:hover { transform: translateY(-4px); box-shadow: 0 12px 24px #09365626 }
+.cta, button { transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease }
+.cta:hover, button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px #0b205333 }
+.cta:active, button:active { transform: translateY(0) }
+.ducts { transition: transform .6s ease }
+.about:hover .ducts { transform: scale(1.03) }
+input, textarea, select { transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease }
+input:focus, textarea:focus, select:focus { background: white; border-color: #16b7ed; box-shadow: 0 0 0 3px #16b7ed2e; outline: none }
+
+/* ---------- Si el usuario pide menos animacion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  html.js [data-reveal] { opacity: 1; transform: none; transition: none }
+  .intro h1, .intro p, .intro .cta, .wave { animation: none }
+  .hero::before { transform: none }
+  .scroll-progress { display: none }
+  .card:hover, .clients div:hover, .cta:hover, button:hover, .about:hover .ducts, .card:hover > img, .card:hover .card-title i { transform: none }
+}

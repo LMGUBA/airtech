@@ -1,0 +1,404 @@
+/* ============================================================
+   Burbuja de contacto (speed-dial) + asistente virtual
+   Todo va con prefijo .bc- para no chocar con landing.css,
+   que define reglas globales de button, form, label y textarea.
+   ============================================================ */
+
+.bc {
+  --bc-primario: #087bbd;
+  --bc-primario-oscuro: #06366a;
+  --bc-oscuro: #05264e;
+  --bc-acento: #16b7ed;
+  --bc-tinta: #0b2053;
+  --bc-verde: #25d366;
+  --bc-borde: #d7e3ee;
+
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: inherit;
+  pointer-events: none;
+}
+
+/* El sprite de iconos no ocupa espacio */
+.bc-sprite { position: absolute; width: 0; height: 0; overflow: hidden }
+
+/* ----------------------------- Menu ----------------------------- */
+.bc-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+}
+.bc.is-open .bc-menu { pointer-events: auto }
+
+.bc-areas, .bc-opcion {
+  opacity: 0;
+  transform: translateY(14px) scale(.92);
+  transition: opacity .28s ease, transform .28s cubic-bezier(.22, .61, .36, 1);
+}
+.bc.is-open .bc-areas,
+.bc.is-open .bc-opcion {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--bc-delay, 0ms);
+}
+
+/* Selector de area */
+.bc-areas {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid var(--bc-borde);
+  border-radius: 100px;
+  box-shadow: 0 6px 18px #0b205319;
+}
+.bc-area {
+  margin: 0;
+  display: block;
+  border: 0;
+  cursor: pointer;
+  padding: 7px 14px;
+  border-radius: 100px;
+  background: #fff;
+  color: var(--bc-primario);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.1;
+  transition: background-color .25s ease, color .25s ease;
+}
+.bc-area[aria-checked="true"] { background: var(--bc-primario); color: #fff }
+.bc-area:hover { transform: none }
+
+/* Opciones */
+.bc-opciones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+.bc-accion {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.bc-accion:hover { transform: none }
+.bc-etiqueta {
+  display: grid;
+  gap: 1px;
+  text-align: right;
+  max-width: min(58vw, 232px);
+  padding: 7px 12px;
+  background: #fff;
+  border: 1px solid var(--bc-borde);
+  border-radius: 10px;
+  box-shadow: 0 4px 14px #0b205314;
+}
+.bc-titulo {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--bc-tinta);
+}
+.bc-sub {
+  font-size: 12px;
+  line-height: 1.2;
+  color: #51637d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity .18s ease;
+}
+.bc-sub.is-cambiando { opacity: 0 }
+.bc-circulo {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 6px 16px #0b20531f;
+  transition: transform .25s ease;
+}
+.bc-accion:hover .bc-circulo,
+.bc-accion:focus-visible .bc-circulo { transform: scale(1.08) }
+.bc-circulo svg { width: 24px; height: 24px }
+.bc-circulo--ubicacion { background: var(--bc-primario-oscuro) }
+.bc-circulo--correo { background: var(--bc-oscuro) }
+.bc-circulo--asistente { background: var(--bc-acento); color: var(--bc-tinta) }
+.bc-circulo--llamar { background: var(--bc-primario) }
+.bc-circulo--whatsapp { background: var(--bc-verde) }
+
+/* --------------------------- Boton principal --------------------------- */
+.bc-fab {
+  position: relative;
+  isolation: isolate;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bc-acento);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 10px 24px #0b205336;
+  transition: background-color .3s ease, transform .3s ease;
+}
+.bc-fab:hover { transform: translateY(-2px) }
+.bc-fab svg {
+  grid-area: 1 / 1;
+  width: 28px;
+  height: 28px;
+  transition: transform .35s cubic-bezier(.22, .61, .36, 1), opacity .25s ease;
+}
+.bc-icono--cerrar { opacity: 0; transform: rotate(-90deg) scale(.6) }
+.bc.is-open .bc-fab { background: var(--bc-oscuro) }
+.bc.is-open .bc-icono--abrir { opacity: 0; transform: rotate(90deg) scale(.6) }
+.bc.is-open .bc-icono--cerrar { opacity: 1; transform: none }
+
+.bc-pulso {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: bc-pulso 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes bc-pulso {
+  0% { box-shadow: 0 0 0 0 #16b7ed8c }
+  70% { box-shadow: 0 0 0 16px #16b7ed00 }
+  100% { box-shadow: 0 0 0 0 #16b7ed00 }
+}
+.bc.is-open .bc-pulso { animation: none }
+
+/* ----------------------------- Asistente ----------------------------- */
+.bc-chat {
+  position: fixed;
+  right: 18px;
+  bottom: 92px;
+  z-index: 95;
+  width: 380px;
+  max-width: calc(100vw - 36px);
+  height: min(560px, calc(100vh - 124px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 22px 60px #0b205333;
+  opacity: 0;
+  transform: translateY(16px) scale(.96);
+  transform-origin: 100% 100%;
+  transition: opacity .25s ease, transform .25s cubic-bezier(.22, .61, .36, 1);
+  pointer-events: none;
+}
+.bc.is-chat-open .bc-chat { opacity: 1; transform: none; pointer-events: auto }
+
+.bc-chat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  background: linear-gradient(108deg, var(--bc-primario-oscuro), var(--bc-primario));
+}
+.bc-avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffffff2e;
+}
+.bc-avatar svg { width: 23px; height: 23px }
+.bc-chat-head strong { display: block; font-size: 15px; line-height: 1.2 }
+.bc-estado {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #d7ecfb;
+}
+.bc-punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #39d98a;
+  box-shadow: 0 0 0 3px #39d98a3d;
+}
+.bc-cerrar {
+  margin: 0 0 0 auto;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff26;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color .25s ease;
+}
+.bc-cerrar:hover { background: #ffffff40; transform: none }
+.bc-cerrar svg { width: 18px; height: 18px }
+
+.bc-mensajes {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f4f9fd;
+}
+.bc-msg {
+  max-width: 84%;
+  padding: 9px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.42;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bc-msg--bot {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid #dbe6f1;
+  color: var(--bc-tinta);
+  border-bottom-left-radius: 4px;
+}
+.bc-msg--yo {
+  align-self: flex-end;
+  background: var(--bc-primario);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.bc-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px }
+
+.bc-escribiendo { display: flex; gap: 4px; align-items: center; padding: 12px }
+.bc-escribiendo i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8aa3bd;
+  animation: bc-puntos 1.2s infinite ease-in-out;
+}
+.bc-escribiendo i:nth-child(2) { animation-delay: .18s }
+.bc-escribiendo i:nth-child(3) { animation-delay: .36s }
+@keyframes bc-puntos {
+  0%, 60%, 100% { transform: translateY(0); opacity: .45 }
+  30% { transform: translateY(-4px); opacity: 1 }
+}
+
+.bc-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  border: 0;
+  border-top: 1px solid #e3ecf4;
+  border-radius: 0;
+  background: #fff;
+  color: inherit;
+}
+.bc-form textarea {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  margin: 0;
+  min-height: 40px;
+  max-height: 120px;
+  resize: none;
+  padding: 9px 11px;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--bc-tinta);
+  background: #f3f8fc;
+  border: 1px solid #c6d6e4;
+  border-radius: 12px;
+}
+.bc-enviar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bc-acento);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.bc-enviar svg { width: 19px; height: 19px }
+.bc-enviar:disabled { opacity: .45; cursor: not-allowed; transform: none }
+
+.bc-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.bc :focus-visible,
+.bc-chat :focus-visible { outline: 3px solid #16b7ed; outline-offset: 3px }
+
+/* ------------------------------ Movil ------------------------------ */
+@media (max-width: 480px) {
+  .bc { right: 14px; bottom: 14px }
+  .bc-chat {
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: none;
+    height: min(72vh, calc(100vh - 110px));
+  }
+  .bc-etiqueta { max-width: calc(100vw - 110px) }
+}
+
+/* ---------------------- Si se pide menos movimiento ---------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .bc-pulso { animation: none }
+  .bc-areas, .bc-opcion, .bc-chat, .bc-fab, .bc-fab svg, .bc-sub, .bc-circulo {
+    transition: none;
+  }
+  .bc-escribiendo i { animation: none }
+  .bc-fab:hover, .bc-accion:hover .bc-circulo { transform: none }
+}
